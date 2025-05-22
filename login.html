@@ -1,14 +1,57 @@
-{% extends "base.html" %} {% block title %}Login{% endblock %} {% block content
-%}
-<h1>Login</h1>
-{% if message %}
-<p>{{ message }}</p>
-{% endif %}
-<form method="post">
-  <label for="username">Username:</label>
-  <input type="text" id="username" name="username" required /><br /><br />
-  <label for="password">Password:</label>
-  <input type="password" id="password" name="password" required /><br /><br />
-  <input type="submit" value="Login" />
-</form>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Login</h3>
+            </div>
+            <div class="card-body">
+                <form method="POST" action="">
+                    {{ form.hidden_tag() }}
+                    
+                    <div class="mb-3">
+                        {{ form.username.label(class="form-label") }}
+                        {% if form.username.errors %}
+                            {{ form.username(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.username.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.username(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="mb-3">
+                        {{ form.password.label(class="form-label") }}
+                        {% if form.password.errors %}
+                            {{ form.password(class="form-control is-invalid") }}
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                    <span>{{ error }}</span>
+                                {% endfor %}
+                            </div>
+                        {% else %}
+                            {{ form.password(class="form-control") }}
+                        {% endif %}
+                    </div>
+                    
+                    <div class="d-grid">
+                        {{ form.submit(class="btn btn-primary") }}
+                    </div>
+                </form>
+                
+                <div class="text-center mt-3">
+                    <small class="text-muted">
+                        Need an account? 
+                        <a href="{{ url_for('register') }}">Sign Up Now</a>
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

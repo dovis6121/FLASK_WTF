@@ -1,4 +1,21 @@
-{% extends "base.html" %} {% block title %}Home{% endblock %} {% block content
-%}
-<h1>Welcome to the Home Page</h1>
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="jumbotron bg-light p-5 rounded">
+            <h1 class="display-4">Welcome to Flask App!</h1>
+            {% if username %}
+                <p class="lead">Hello, {{ username }}! You are successfully logged in.</p>
+                <hr class="my-4">
+                <p class="mb-0">You can now access all the features of our application.</p>
+            {% else %}
+                <p class="lead">Please log in to access all features.</p>
+                <hr class="my-4">
+                <a class="btn btn-primary btn-lg me-2" href="{{ url_for('login') }}" role="button">Login</a>
+                <a class="btn btn-outline-secondary btn-lg" href="{{ url_for('register') }}" role="button">Register</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock %}
